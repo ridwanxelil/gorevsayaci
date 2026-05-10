@@ -275,10 +275,10 @@
     /* ── COUNTDOWN (başlık satırında, ikonun yanında) ── */
     .task-countdown {
       font-family: var(--font-mono);
-      font-size: .82rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--accent-red);
-      letter-spacing: .02em;
+      letter-spacing: .03em;
       white-space: nowrap;
       flex-shrink: 0;
     }
@@ -631,7 +631,18 @@ function startTitleEdit(id, card, titleWrap, titleEl, pencilBtn) {
 // ── TIMER LOGIC ───────────────────────────────────────────────────────
 function handleTimer(id) {
   const task = tasks.find(t => t.id === id);
-  if (!task || task.timerState === 'running') return;
+  if (!task) return;
+
+  // İkinci tıkta (running iken) → sayacı bitir, yeşile döndür
+  if (task.timerState === 'running') {
+    task.timerState = 'done';
+    task.remaining  = 0;
+    task.startedAt  = null;
+    stopTick(id);
+    saveTasks();
+    render();
+    return;
+  }
 
   stopTick(id);
   task.timerState   = 'running';
