@@ -472,8 +472,8 @@ function render() {
     list.appendChild(grp);
   }
 
-  addSection(done,    'lbl-done',    'fa-solid fa-circle-check', 'Tamamlandı');
-  addSection(running, 'lbl-running', 'fa-solid fa-clock',        'Çalışıyor');
+  addSection(done,    'lbl-done',    'fa-solid fa-circle-check', 'Musaid');
+  addSection(running, 'lbl-running', 'fa-solid fa-clock',        'Beklemede');
   addSection(idle,    'lbl-idle',    'fa-regular fa-clock',      'Bekliyor');
 
   tasks.filter(t => t.timerState === 'running').forEach(t => {
@@ -500,7 +500,7 @@ function buildItem(task) {
     timerBtn.title = 'Sayacı Başlat (5 saat)';
     timerBtn.innerHTML = `<i class="fa-regular fa-clock"></i>`;
   } else if (state === 'running') {
-    timerBtn.title = 'Çalışıyor…';
+    timerBtn.title = 'Beklemede…';
     timerBtn.innerHTML = `<i class="fa-solid fa-clock"></i>`;
   } else {
     timerBtn.title = 'Tekrar Başlat';
@@ -531,7 +531,7 @@ function buildItem(task) {
     if (state === 'running') {
       cdEl.textContent = fmtTime(computeRemaining(task));
     } else {
-      cdEl.textContent = '✓ Bitti';
+      cdEl.textContent = '✓ Müsait';
     }
     titleWrap.appendChild(cdEl);
   }
